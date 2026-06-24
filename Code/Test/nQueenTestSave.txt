@@ -1,0 +1,25 @@
+===Initial Game Info===
+GAME_NAME: "NQueen"
+STEP_TYPE: PUT_STONE
+GAME_STAGE: NOT_STARTED
+BOARD_SIZE: 8 8
+PLAYER_COUNT: 2
+CURRENT_PLAYER_ID: 1
+WINNER_PLAYER_ID: -1
+---Stone Set---
+STONE_COUNT: 3
+"BLACK_QUEEN"
+"WHITE_QUEEN"
+"EMPTY"
+---Player IDs and Names---
+1: "Alice"
+2: "Bob"
+---Initial Stones---
+INITIAL_STONE_COUNT: 0
+===Step History===
+STEP_COUNT: 4
+1. Player 1 : PUT "BLACK_QUEEN" ( 1 , 1 ) 
+2. Player 2 : PUT "WHITE_QUEEN" ( 2 , 3 ) 
+3. Player 1 : PUT "BLACK_QUEEN" ( 3 , 5 ) 
+4. Player 2 : PUT "WHITE_QUEEN" ( 4 , 4 ) 
+===End of Game Info===

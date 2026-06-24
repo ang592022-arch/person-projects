@@ -1,0 +1,31 @@
+===Initial Game Info===
+GAME_NAME: "GoBang"
+STEP_TYPE: PUT_STONE
+GAME_STAGE: NOT_STARTED
+BOARD_SIZE: 7 7
+PLAYER_COUNT: 2
+CURRENT_PLAYER_ID: 1
+WINNER_PLAYER_ID: -1
+---Stone Set---
+STONE_COUNT: 3
+"BLACK"
+"WHITE"
+"EMPTY"
+---Player IDs and Names---
+1: "Alice"
+2: "Bob"
+---Initial Stones---
+INITIAL_STONE_COUNT: 0
+===Step History===
+STEP_COUNT: 10
+1. Player 1 : PUT "UNKNOWN" ( 4 , 4 ) 
+2. Player 2 : PUT "UNKNOWN" ( 4 , 4 ) 
+3. Player 2 : PUT "UNKNOWN" ( 8 , 8 ) 
+4. Player 2 : PUT "UNKNOWN" ( 4 , 5 ) 
+5. Player 1 : PUT "BLACK" ( 5 , 4 ) 
+6. Player 2 : PUT "WHITE" ( 5 , 5 ) 
+7. Player 1 : PUT "BLACK" ( 6 , 4 ) 
+8. Player 1 : PUT "BLACK" ( 7 , 4 ) 
+9. Player 2 : PUT "WHITE" ( 1 , 2 ) 
+10. Player 1 : PUT "BLACK" ( 3 , 4 ) 
+===End of Game Info===
