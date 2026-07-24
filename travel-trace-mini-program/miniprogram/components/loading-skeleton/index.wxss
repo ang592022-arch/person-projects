@@ -1,0 +1,35 @@
+.skeleton-card {
+  display: grid;
+  gap: 18rpx;
+  padding: var(--space-card, 28rpx);
+  background: var(--color-card, #FFFCF7);
+  border: 1rpx solid var(--color-border, #E7E1D7);
+  border-radius: var(--radius-card, 20rpx);
+}
+
+.cover,
+.line {
+  background: linear-gradient(90deg, var(--color-divider, #ECE7DF), var(--color-primary-light, #E4ECE7), var(--color-divider, #ECE7DF));
+  border-radius: var(--radius-input, 16rpx);
+}
+
+.cover {
+  height: 168rpx;
+}
+
+.lines {
+  display: grid;
+  gap: 12rpx;
+}
+
+.line {
+  height: 24rpx;
+}
+
+.width-1 {
+  width: 82%;
+}
+
+.width-2 {
+  width: 62%;
+}

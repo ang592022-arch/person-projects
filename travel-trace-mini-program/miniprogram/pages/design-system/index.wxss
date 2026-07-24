@@ -1,0 +1,21 @@
+.preview-page {
+  display: grid;
+  gap: var(--space-section, 40rpx);
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-base, 16rpx);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.bottom-space {
+  height: 24rpx;
+}

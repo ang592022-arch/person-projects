@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/city-picker/index",
+    "pages/import-assistant/index",
+    "pages/theme-settings/index",
+    "pages/foreign-city-list/index",
+    "pages/china-map/index",
+    "pages/region-detail/index",
+    "pages/record-edit/index",
+    "pages/photo-preview/index",
+    "pages/stats/index",
+    "pages/annual-report/index",
+    "pages/trip-share/index",
+    "pages/timeline/index",
+    "pages/mine/index"
+  ],
+  "lazyCodeLoading": "requiredComponents",
+  "subpackages": [
+    {
+      "root": "packages/map",
+      "pages": [
+        "pages/city-map/index",
+        "pages/world-map/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "漫迹 · Travel Trace",
+    "navigationBarBackgroundColor": "#F5F2EB",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F2EB"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

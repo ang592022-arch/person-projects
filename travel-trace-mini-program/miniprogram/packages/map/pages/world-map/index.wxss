@@ -1,0 +1,102 @@
+.map-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+
+.map-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24rpx;
+  align-items: end;
+  padding: 30rpx;
+}
+
+.map-kicker,
+.map-heading,
+.map-copy,
+.hero-number,
+.hero-label {
+  display: block;
+}
+
+.map-kicker {
+  color: var(--color-accent, #C28E5C);
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.map-heading {
+  margin-top: 8rpx;
+  color: var(--color-text, #27312D);
+  font-size: 42rpx;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.map-copy {
+  margin-top: 12rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+  min-width: 230rpx;
+}
+
+.hero-number {
+  color: var(--color-primary, #496B5C);
+  font-size: 42rpx;
+  font-weight: 600;
+  line-height: 1;
+  text-align: right;
+}
+
+.hero-label {
+  margin-top: 8rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 22rpx;
+  text-align: right;
+}
+
+.legend-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx 24rpx;
+  padding: 20rpx 24rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 23rpx;
+}
+
+.legend-dot {
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+}
+
+.legend-dot.visited {
+  background: var(--visited-region, #658875);
+}
+
+.legend-dot.marker {
+  width: 18rpx;
+  height: 18rpx;
+  background: var(--selected-region, #304D40);
+  border: 4rpx solid var(--color-accent-light, #F2E7DA);
+}
+
+.legend-dot.unvisited {
+  background: var(--unvisited-region, #DDD8CF);
+  border: 1rpx solid var(--map-border, #AAB5AD);
+}

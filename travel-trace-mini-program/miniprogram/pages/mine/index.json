@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "page-title": "/components/page-title/index",
+    "bottom-navigation": "/components/bottom-navigation/index"
+  }
+}

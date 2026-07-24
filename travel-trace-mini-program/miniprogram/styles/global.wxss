@@ -1,0 +1,90 @@
+@import "./tokens.wxss";
+@import "./theme.wxss";
+@import "./typography.wxss";
+@import "./animations.wxss";
+
+page {
+  min-height: 100vh;
+  color: var(--color-text, #27312D);
+  background: var(--color-page, #F5F2EB);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+view,
+text,
+button,
+input,
+textarea,
+image {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  border-radius: 0;
+  line-height: 1;
+  background: transparent;
+}
+
+button::after {
+  border: 0;
+}
+
+.page {
+  min-height: 100vh;
+  padding: var(--space-page, 32rpx);
+  padding-bottom: calc(var(--space-page, 32rpx) + env(safe-area-inset-bottom));
+  color: var(--color-text, #27312D);
+  background: var(--color-page, #F5F2EB);
+}
+
+.themed-page {
+  min-height: 100vh;
+  color: var(--color-text, #27312D);
+  background: var(--color-page, #F5F2EB);
+}
+
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border-radius: var(--radius-button, 18rpx);
+  transition: transform var(--duration-fast), opacity var(--duration-fast);
+}
+
+.primary-button:active,
+.secondary-button:active {
+  opacity: 0.88;
+  transform: scale(0.985);
+}
+
+.primary-button {
+  color: var(--button-text, #FFFCF7);
+  background: var(--color-primary, #496B5C);
+}
+
+.secondary-button {
+  color: var(--color-primary, #496B5C);
+  background: var(--color-primary-light, #E4ECE7);
+  border: 1rpx solid rgba(73, 107, 92, 0.16);
+}
+
+.muted-text {
+  color: var(--color-text-secondary, #777D78);
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.map-compliance-note {
+  display: block;
+  padding: 0 8rpx 12rpx;
+  color: var(--color-text-muted, #A3A7A3);
+  font-size: 20rpx;
+  line-height: 1.5;
+  text-align: center;
+}

@@ -1,0 +1,4 @@
+{
+  "description": "Example local WeChat DevTools config. Copy to project.private.config.json for local-only settings.",
+  "projectname": "travel-map-diary"
+}

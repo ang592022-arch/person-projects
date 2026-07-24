@@ -1,0 +1,4 @@
+<view class="page">
+  <text class="section-title">旅行照片</text>
+  <text class="section-subtitle">后续会用微信原生图片预览和云存储文件 ID 完成照片查看。</text>
+</view>

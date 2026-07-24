@@ -1,0 +1,127 @@
+.share-page {
+  display: grid;
+  gap: 24rpx;
+  padding-bottom: calc(48rpx + env(safe-area-inset-bottom));
+}
+
+.share-cover {
+  position: relative;
+  min-height: 520rpx;
+  overflow: hidden;
+  color: #FFFCF7;
+  background: var(--color-primary-dark, #314C40);
+  border-radius: 24rpx;
+}
+
+.share-cover::before,
+.share-cover::after {
+  position: absolute;
+  content: '';
+  border: 2rpx solid rgba(255, 252, 247, 0.16);
+  border-radius: 50%;
+}
+
+.share-cover::before {
+  left: -100rpx;
+  top: 80rpx;
+  width: 700rpx;
+  height: 280rpx;
+  transform: rotate(-16deg);
+}
+
+.share-cover::after {
+  right: -180rpx;
+  bottom: 60rpx;
+  width: 580rpx;
+  height: 220rpx;
+  border-color: rgba(194, 142, 92, 0.34);
+  transform: rotate(18deg);
+}
+
+.share-brand {
+  position: absolute;
+  left: 32rpx;
+  top: 30rpx;
+  z-index: 1;
+  font-size: 20rpx;
+  font-weight: 600;
+  opacity: 0.72;
+}
+
+.share-main {
+  position: absolute;
+  left: 34rpx;
+  right: 34rpx;
+  bottom: 38rpx;
+  z-index: 1;
+}
+
+.share-place,
+.share-date,
+.share-title {
+  display: block;
+}
+
+.share-place {
+  font-size: 60rpx;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.share-date {
+  margin-top: 12rpx;
+  color: var(--color-accent-light, #F2E7DA);
+  font-size: 24rpx;
+}
+
+.share-title {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.story-card {
+  display: grid;
+  gap: 14rpx;
+  padding: 30rpx;
+}
+
+.story-kicker {
+  color: var(--color-accent, #C28E5C);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+.story-content {
+  color: var(--color-text, #27312D);
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+
+.privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 22rpx 24rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.privacy-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 48rpx;
+  height: 48rpx;
+  color: var(--color-primary, #496B5C);
+  font-size: 22rpx;
+  font-weight: 600;
+  background: var(--color-primary-light, #E4ECE7);
+  border-radius: 14rpx;
+}
+
+.share-button {
+  width: 100%;
+}

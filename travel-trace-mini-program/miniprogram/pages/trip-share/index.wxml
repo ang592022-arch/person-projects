@@ -1,0 +1,22 @@
+<view class="page share-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="share-cover {{shadowClass}}">
+    <text class="share-brand">漫迹 · TRAVEL TRACE</text>
+    <view class="share-main">
+      <text class="share-place">{{place}}</text>
+      <text wx:if="{{date}}" class="share-date">{{date}}</text>
+      <text class="share-title">{{title}}</text>
+    </view>
+  </view>
+
+  <view class="story-card theme-card {{shadowClass}}">
+    <text class="story-kicker">TRAVEL NOTE</text>
+    <text class="story-content">{{summary}}</text>
+  </view>
+
+  <view class="privacy-note theme-card">
+    <view class="privacy-mark">私</view>
+    <text>这是旅行者主动分享的摘要，不包含同行人员、票据、完整日志和原始照片。</text>
+  </view>
+
+  <button class="primary-button share-button" open-type="share">分享这段旅行</button>
+</view>

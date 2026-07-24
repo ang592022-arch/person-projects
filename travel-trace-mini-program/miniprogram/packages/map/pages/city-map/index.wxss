@@ -1,0 +1,108 @@
+.map-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.map-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24rpx;
+  align-items: end;
+  padding: 30rpx;
+}
+
+.map-kicker,
+.map-heading,
+.map-copy,
+.progress-number,
+.progress-label {
+  display: block;
+}
+
+.map-kicker {
+  color: var(--color-accent, #C28E5C);
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.map-heading {
+  margin-top: 8rpx;
+  color: var(--color-text, #27312D);
+  font-size: 40rpx;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.map-copy {
+  margin-top: 12rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+
+.progress-box {
+  min-width: 150rpx;
+  padding: 18rpx;
+  background: var(--color-primary-light, #E4ECE7);
+  border-radius: var(--radius-card, 20rpx);
+}
+
+.progress-number {
+  color: var(--color-primary, #496B5C);
+  font-size: 42rpx;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.progress-label {
+  margin-top: 8rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 22rpx;
+  text-align: center;
+}
+
+.legend-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx 24rpx;
+  padding: 20rpx 24rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: var(--color-text-secondary, #777D78);
+  font-size: 23rpx;
+}
+
+.legend-dot {
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+}
+
+.legend-dot.visited {
+  background: var(--visited-region, #658875);
+}
+
+.legend-dot.multi {
+  background: var(--multi-visit-region, #4F735F);
+  border: 3rpx solid var(--selected-region, #304D40);
+}
+
+.legend-dot.unvisited {
+  background: var(--unvisited-region, #DDD8CF);
+  border: 1rpx solid var(--map-border, #AAB5AD);
+}
+
+.boundary-source-note {
+  display: block;
+  padding: 0 8rpx 12rpx;
+  color: var(--color-text-muted, #A3A7A3);
+  font-size: 20rpx;
+  line-height: 1.5;
+  text-align: center;
+}

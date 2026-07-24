@@ -1,0 +1,167 @@
+<view class="home-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="hero-cover {{shadowClass}}">
+    <image class="hero-image" src="{{homeCoverUrl}}" mode="aspectFill" binderror="handleCoverError" />
+    <view class="hero-shade"></view>
+
+    <view class="hero-toolbar">
+      <view class="brand-lockup">
+        <view class="brand-mark">漫</view>
+        <view class="brand-copy">
+          <text class="brand-name">漫迹</text>
+          <text class="brand-en">TRAVEL TRACE</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="hero-copy">
+      <text class="hero-eyebrow">继续记录你的世界</text>
+      <text class="hero-title">山河有迹，岁月成章</text>
+      <text class="hero-meta">你已点亮 {{litCount}} 座城市，留下 {{recordCount}} 段旅行故事。</text>
+    </view>
+
+    <button class="import-entry" bindtap="goAddFootprint">
+      <view class="import-icon">+</view>
+      <view class="import-text">
+        <text class="import-title">快速添加城市</text>
+        <text class="import-copy">选择省份和城市，一步点亮</text>
+      </view>
+      <text class="import-arrow">›</text>
+    </button>
+  </view>
+
+  <view class="map-section theme-card {{shadowClass}}">
+    <view class="map-heading">
+      <view>
+        <text class="section-kicker">MY TRAVEL MAP</text>
+        <text class="map-title">我的旅行地图</text>
+        <text class="map-subtitle">已点亮 {{litCount}} 个城市 · 地图数据实时同步</text>
+      </view>
+      <view class="map-level-badge">中国</view>
+    </view>
+
+    <view class="map-actions">
+      <view class="map-action secondary" aria-role="button" aria-label="打开世界地图" bindtap="goWorldMap" hover-class="map-action-pressed">世界地图</view>
+      <view class="map-action primary" aria-role="button" aria-label="添加旅行足迹" bindtap="goAddFootprint" hover-class="map-action-pressed">
+        <view class="add-icon">+</view>
+        <text>添加旅行足迹</text>
+      </view>
+    </view>
+
+    <view class="map-stage" bindtap="goChinaMap">
+      <view class="home-map-board">
+        <boundary-map-board
+          style="display:block;height:100%;"
+          compact="{{true}}"
+          show-labels="{{false}}"
+          show-region-list="{{false}}"
+          regions="{{homeMapRegions}}"
+          theme="{{theme}}"
+          bindregiontap="goChinaMap"
+        />
+      </view>
+      <view class="map-caption">
+        <view>
+          <text class="map-caption-title">中国足迹</text>
+          <text class="map-caption-copy">省级标准边界 · 城市足迹联动</text>
+        </view>
+        <text class="map-caption-arrow">›</text>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="timeline">
+    <view
+      wx:for="{{timelineYears}}"
+      wx:key="label"
+      wx:for-item="year"
+      class="timeline-year {{year.active ? 'active' : ''}}"
+    >
+      <text>{{year.label}}</text>
+      <text wx:if="{{year.count}}" class="timeline-count">{{year.count}}</text>
+    </view>
+    <text class="all">全部</text>
+  </view>
+  <view class="ticks">
+    <view wx:for="{{ticks}}" wx:key="*this" class="tick {{index % 6 === 0 ? 'major' : ''}}"></view>
+  </view>
+
+  <view class="stats-panel theme-card {{shadowClass}}">
+    <view class="stats-head">
+      <text>我已去过</text>
+      <view class="distance-box">
+        <text class="distance">预估总里程：{{distanceText}}</text>
+        <text class="distance-hint">{{distanceHint}}</text>
+      </view>
+    </view>
+    <view class="stats-grid">
+      <view>
+        <text class="stat-number">{{litCount}}</text>
+        <text class="stat-label">城市</text>
+      </view>
+      <view>
+        <text class="stat-number">{{recordCount}}</text>
+        <text class="stat-label">足迹</text>
+      </view>
+      <view>
+        <text class="stat-number">{{homeCount}}</text>
+        <text class="stat-label">常住地</text>
+      </view>
+    </view>
+    <view class="home-places">
+      <button
+        wx:for="{{homePlaces}}"
+        wx:key="regionCode"
+        class="home-chip"
+        data-region-code="{{item.regionCode}}"
+        bindtap="openHomePlace"
+      >
+        <text class="home-dot"></text>
+        <text>{{item.name}}</text>
+      </button>
+      <text wx:if="{{homePlaces.length === 0}}" class="home-empty">在地区详情页把常住城市设为“家”后，里程会自动计算。</text>
+    </view>
+  </view>
+
+  <view class="section-heading">
+    <view></view>
+    <text>国内</text>
+    <view></view>
+  </view>
+
+  <view class="photo-strip">
+    <button
+      wx:for="{{recentRecords}}"
+      wx:key="id"
+      wx:for-item="record"
+      class="photo-card {{record.toneClass}}"
+      data-region-code="{{record.regionCode}}"
+      bindtap="openRegion"
+    >
+      <image
+        wx:if="{{record.coverUrl}}"
+        class="photo-cover"
+        src="{{record.coverUrl}}"
+        mode="aspectFill"
+        data-record-id="{{record.id}}"
+        binderror="handleRecentCoverError"
+      />
+      <view class="photo-mask"></view>
+      <view class="photo-content">
+        <text class="year">{{record.year}}</text>
+        <text class="photo-title">{{record.title}}</text>
+        <text class="photo-place">{{record.place}}</text>
+        <text class="photo-date">{{record.dateText}} · {{record.imageCount}} 张照片</text>
+      </view>
+    </button>
+
+    <view wx:if="{{!hasRecentRecords}}" class="photo-empty theme-card">
+      <text class="empty-title">这里还没有留下故事</text>
+      <text class="empty-copy">新增一次旅行记录后，年份和旅行卡片会自动出现在这里。</text>
+    </view>
+  </view>
+
+  <button class="stats-link" bindtap="goStats">查看完整统计</button>
+
+  <bottom-navigation active="map" />
+</view>

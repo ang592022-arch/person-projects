@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "boundary-map-board": "/components/boundary-map-board/index",
+    "bottom-navigation": "/components/bottom-navigation/index",
+    "loading-skeleton": "/components/loading-skeleton/index"
+  },
+  "navigationBarTitleText": "中国地图"
+}

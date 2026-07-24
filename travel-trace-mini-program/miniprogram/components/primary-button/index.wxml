@@ -1,0 +1,3 @@
+<button class="primary pressable {{disabled ? 'disabled' : ''}}" loading="{{loading}}" disabled="{{disabled || loading}}" bindtap="handleTap">
+  <slot />
+</button>

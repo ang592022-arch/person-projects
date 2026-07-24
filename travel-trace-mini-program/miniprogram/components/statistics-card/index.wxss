@@ -1,0 +1,38 @@
+.stats-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 26rpx 0;
+  overflow: hidden;
+  background: var(--color-card, #FFFCF7);
+  border: 1rpx solid var(--color-border, #E7E1D7);
+  border-radius: var(--radius-card, 20rpx);
+}
+
+.stat-item {
+  display: grid;
+  gap: 8rpx;
+  padding: 0 20rpx;
+  text-align: center;
+  border-right: 1rpx solid var(--color-divider, #ECE7DF);
+}
+
+.stat-item:last-child {
+  border-right: 0;
+}
+
+.value {
+  color: var(--color-primary, #496B5C);
+  font-size: 48rpx;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.label {
+  color: var(--color-text-secondary, #777D78);
+  font-size: 24rpx;
+}
+
+.helper {
+  color: var(--color-text-muted, #A3A7A3);
+  font-size: 22rpx;
+}

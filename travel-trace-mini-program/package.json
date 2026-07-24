@@ -1,0 +1,20 @@
+{
+  "name": "manji-travel-trace-mini-program",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A configuration-driven WeChat Mini Program travel map journal.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check:source": "node scripts/check-open-source.js",
+    "check:ocr": "node scripts/check-ocr-parser.js",
+    "check": "pnpm run typecheck && pnpm run check:source && pnpm run check:ocr"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

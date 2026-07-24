@@ -1,0 +1,64 @@
+<view class="page stats-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <text class="section-title">我的旅行统计</text>
+  <text class="section-subtitle">按地区层级自动汇总城市、省份和国家。切换到云端模式后，数据会按当前微信用户隔离保存。</text>
+
+  <button class="annual-entry theme-card {{shadowClass}}" bindtap="goAnnualReport">
+    <view><text class="annual-kicker">ANNUAL REPORT</text><text class="annual-title">查看年度旅行报告</text></view>
+    <text class="annual-arrow">›</text>
+  </button>
+
+  <view class="grid">
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{recordCount}}</text>
+      <text class="label">旅行日志</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{cityCount}}</text>
+      <text class="label">去过的城市</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{provinceCount}}</text>
+      <text class="label">去过的省份</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{countryCount}}</text>
+      <text class="label">去过的国家/地区</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{countyCount}}</text>
+      <text class="label">去过的县级地区</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{photoCount}}</text>
+      <text class="label">旅行照片和视频</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num distance-num">{{distanceText}}</text>
+      <text class="label">预估总里程</text>
+    </view>
+    <view class="stat theme-card {{shadowClass}}">
+      <text class="num">{{homeCount}}</text>
+      <text class="label">常住地</text>
+    </view>
+  </view>
+
+  <view class="migration theme-card {{shadowClass}}">
+    <text class="block-title">云端备份</text>
+    <text class="migration-copy">配置云环境后，可以把当前设备上的旅行记录、点亮状态、媒体文件、自定义国外城市和主题偏好迁移到云端。</text>
+    <button class="primary-button migrate-button" loading="{{migrating}}" disabled="{{migrating}}" bindtap="migrateToCloud">
+      {{canMigrate ? '迁移本地数据到云端' : '等待云环境配置'}}
+    </button>
+    <text wx:if="{{migrationSummary}}" class="migration-result">{{migrationSummary}}</text>
+  </view>
+
+  <view class="recent theme-card {{shadowClass}}">
+    <text class="block-title">最近记录</text>
+    <view wx:if="{{recentRecords.length == 0}}" class="empty">还没有旅行日志。</view>
+    <view wx:for="{{recentRecords}}" wx:key="id" class="recent-item">
+      <text class="date">{{item.visitDate}}</text>
+      <text class="title">{{item.title || '未命名旅行'}}</text>
+    </view>
+  </view>
+
+  <bottom-navigation active="footprints" />
+</view>

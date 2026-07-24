@@ -1,0 +1,101 @@
+<view class="page detail-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="cover-card {{shadowClass}}">
+    <image wx:if="{{coverUrl}}" class="cover-image" src="{{coverUrl}}" mode="aspectFill" />
+    <view wx:else class="cover-placeholder">
+      <view class="map-line one"></view>
+      <view class="map-line two"></view>
+      <view class="map-pin"></view>
+    </view>
+    <view class="cover-shade"></view>
+    <view class="cover-content">
+      <view class="cover-copy">
+        <text class="eyebrow">{{levelText}}</text>
+        <text class="region-name">{{regionName}}</text>
+        <text wx:if="{{parentName}}" class="parent-name">{{parentName}}</text>
+        <text class="visit-copy">去过 {{visitCount}} 次 · 最近到访：{{recentVisitMonth}}</text>
+      </view>
+      <button class="light-button {{lit ? 'active' : ''}}" loading="{{togglingLit}}" disabled="{{togglingLit}}" bindtap="toggleLit">{{lit ? '已点亮' : '点亮'}}</button>
+    </view>
+  </view>
+
+  <view class="stats-row theme-card {{shadowClass}}">
+    <view class="stat-card">
+      <text class="stat-number">{{firstVisitDate || '未记录'}}</text>
+      <text class="stat-label">第一次到访</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{recentVisitDate || '未记录'}}</text>
+      <text class="stat-label">最近到访</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{visitCount}}</text>
+      <text class="stat-label">到访次数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{photoCount}}</text>
+      <text class="stat-label">影像数量</text>
+    </view>
+  </view>
+
+  <view class="toolbar theme-card {{shadowClass}}">
+    <button class="primary-button" bindtap="goEdit">记录一次新的旅行</button>
+    <button class="secondary-button home-toggle {{isHomePlace ? 'active' : ''}}" bindtap="toggleHomePlace">
+      {{isHomePlace ? '取消常住地' : '设为家'}}
+    </button>
+  </view>
+
+  <view class="records layout-{{journalLayout}}">
+    <text class="block-title">{{journalTitle}}</text>
+    <empty-state
+      wx:if="{{records.length === 0}}"
+      title="这里还没有留下故事"
+      description="点亮这个城市后，记录第一次旅行的日期、感受和照片。"
+      action-text="记录第一次旅行"
+      bindaction="goAddFirstRecord"
+    />
+
+    <view wx:for="{{records}}" wx:key="id" class="record-card theme-card {{shadowClass}}">
+      <view class="record-top">
+        <text class="record-date">{{item.visitDate}}</text>
+        <view class="record-actions">
+          <button wx:if="{{item.isShareable}}" open-type="share" data-id="{{item.id}}">分享</button>
+          <button data-id="{{item.id}}" bindtap="editRecord">编辑</button>
+          <button class="delete" loading="{{deletingRecordId == item.id}}" disabled="{{deletingRecordId}}" data-id="{{item.id}}" bindtap="deleteRecord">删除</button>
+        </view>
+      </view>
+      <text wx:if="{{item.title}}" class="record-title">{{item.title}}</text>
+      <text wx:if="{{item.tagText}}" class="record-tags">{{item.tagText}}</text>
+      <view class="record-meta">
+        <text>{{item.privacyText}}</text>
+        <text wx:if="{{item.companionText}}">同行：{{item.companionText}}</text>
+      </view>
+      <text wx:if="{{item.content}}" class="record-content">{{item.content}}</text>
+      <view wx:if="{{item.ticketCount > 0}}" class="record-tickets">
+        <text class="ticket-title">关联票据 {{item.ticketCount}} 张</text>
+        <text class="ticket-summary">{{item.ticketSummary}}</text>
+      </view>
+      <view wx:if="{{item.imageCount > 0}}" class="record-images">
+        <view
+          wx:for="{{item.mediaItems}}"
+          wx:for-item="media"
+          wx:for-index="imageIndex"
+          wx:key="fileID"
+          class="record-media"
+          data-record-index="{{index}}"
+          data-image-index="{{imageIndex}}"
+          bindtap="previewRecordImages"
+        >
+          <image wx:if="{{media.mediaType !== 'video'}}" src="{{media.url}}" mode="aspectFill" />
+          <view wx:else class="video-thumb">
+            <text>▶</text>
+            <text>视频</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{records.length > 0}}" class="fixed-action">
+    <button class="primary-button" bindtap="goEdit">记录一次新的旅行</button>
+  </view>
+</view>

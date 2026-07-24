@@ -1,0 +1,9 @@
+{
+  "name": "ocrImport",
+  "version": "1.0.0",
+  "description": "OCR entry for travel screenshot import",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "4.0.2"
+  }
+}

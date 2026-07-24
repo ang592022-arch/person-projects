@@ -1,0 +1,35 @@
+<view class="page map-page city-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="map-hero theme-card {{loading ? '' : 'theme-shadow-light'}}">
+    <view>
+      <text class="map-kicker">City Trace</text>
+      <text class="map-heading">{{provinceName}}城市地图</text>
+      <text class="map-copy">已点亮 {{litCityCount}} / {{totalCityCount}} 个城市。点击城市进入旅行空间，日志、照片和票据都归档到城市。</text>
+    </view>
+    <view class="progress-box">
+      <text class="progress-number">{{progressPercent}}%</text>
+      <text class="progress-label">点亮进度</text>
+    </view>
+  </view>
+
+  <view class="legend-card theme-card">
+    <view class="legend-item"><view class="legend-dot visited"></view><text>已去过</text></view>
+    <view class="legend-item"><view class="legend-dot multi"></view><text>多次到访</text></view>
+    <view class="legend-item"><view class="legend-dot unvisited"></view><text>未到访</text></view>
+  </view>
+
+  <loading-skeleton wx:if="{{loading}}" rows="{{3}}" />
+
+  <boundary-map-board
+    wx:else
+    title="城市行政边界"
+    subtitle="市级边界按移动端精度渲染。点击城市进入旅行空间，日志和照片以城市为单位保存。"
+    missing-text="市级边界暂时无法加载，请返回后重试。"
+    show-labels="{{false}}"
+    show-region-list="{{false}}"
+    regions="{{regions}}"
+    theme="{{theme}}"
+    bindregiontap="handleRegionTap"
+  />
+
+  <text class="boundary-source-note map-compliance-note">{{boundarySourceNote}}</text>
+</view>

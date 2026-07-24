@@ -1,0 +1,104 @@
+<view class="page edit-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="head theme-card {{shadowClass}}">
+    <text class="eyebrow">Travel Note</text>
+    <text class="section-title">{{recordId ? '编辑旅行日志' : '新增旅行日志'}}</text>
+    <text class="section-subtitle">{{regionName}}</text>
+  </view>
+
+  <view class="form">
+    <view class="field theme-card {{shadowClass}}">
+      <text class="label">到访日期</text>
+      <picker mode="date" value="{{visitDate}}" bindchange="handleDateChange">
+        <view class="picker-value">{{visitDate}}</view>
+      </picker>
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <text class="label">标题</text>
+      <input value="{{title}}" placeholder="例如：第一次去成都" bindinput="handleTitleInput" />
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <text class="label">旅行感受</text>
+      <textarea value="{{content}}" maxlength="2000" placeholder="写下那天看到的风景、吃到的味道、遇见的人。" bindinput="handleContentInput" />
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <text class="label">标签</text>
+      <input value="{{tagsText}}" placeholder="美食 自然风景 历史建筑" bindinput="handleTagsInput" />
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <text class="label">同行人员</text>
+      <input value="{{companionsText}}" placeholder="例如：小林、妈妈、大学室友" bindinput="handleCompanionsInput" />
+      <text class="hint">多人之间可用空格、逗号或顿号分隔。</text>
+    </view>
+
+    <view class="field privacy-field theme-card {{shadowClass}}">
+      <view class="privacy-copy">
+        <text class="label">旅行隐私</text>
+        <text class="hint">默认私密。允许分享时仅生成地点、日期、标题和简短感受摘要，不包含票据、同行人员和完整原图。</text>
+      </view>
+      <button class="privacy-toggle {{visibility === 'shareable' ? 'active' : ''}}" bindtap="toggleVisibility">
+        <view class="privacy-toggle-dot"></view>
+        <text>{{visibility === 'shareable' ? '允许分享摘要' : '仅自己可见'}}</text>
+      </button>
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <view class="label-row">
+        <text class="label">旅行照片和视频</text>
+        <text class="hint">{{images.length}} / {{maxMediaCount}}</text>
+      </view>
+      <view class="photo-grid">
+        <view wx:for="{{images}}" wx:key="fileID" class="photo">
+          <image wx:if="{{item.mediaType !== 'video'}}" src="{{item.url}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}" />
+          <view wx:else class="video-thumb" bindtap="previewImage" data-index="{{index}}">
+            <text class="video-icon">▶</text>
+            <text class="video-label">视频</text>
+          </view>
+          <button class="remove-photo" disabled="{{saving}}" data-index="{{index}}" bindtap="removeImage">×</button>
+        </view>
+        <button wx:if="{{images.length < maxMediaCount}}" class="add-photo" disabled="{{saving}}" bindtap="chooseImages">
+          <text class="add-icon">+</text>
+          <text class="add-label">添加</text>
+        </button>
+      </view>
+      <text class="hint">微信一次最多选择少量媒体，可以多次点击“+”追加，第一版本地最多保存 {{maxMediaCount}} 个。</text>
+    </view>
+
+    <view class="field theme-card {{shadowClass}}">
+      <view class="label-row">
+        <text class="label">关联票据</text>
+        <button class="mini-button" bindtap="addTicket">添加票据</button>
+      </view>
+
+      <view wx:if="{{tickets.length === 0}}" class="ticket-empty">可以关联机票、火车票或高铁票，后续会支持票据图片识别。</view>
+
+      <view wx:for="{{tickets}}" wx:key="id" class="ticket-card">
+        <view class="ticket-top">
+          <picker range="{{ticketTypeLabels}}" value="{{item.type === 'flight' ? 0 : item.type === 'train' ? 1 : 2}}" data-index="{{index}}" bindchange="handleTicketTypeChange">
+            <view class="picker-value compact">{{item.type === 'flight' ? '机票' : item.type === 'train' ? '火车票' : '高铁票'}}</view>
+          </picker>
+        <button class="remove-ticket" disabled="{{saving}}" data-index="{{index}}" bindtap="removeTicket">删除</button>
+        </view>
+        <input value="{{item.title}}" placeholder="票据标题，例如 北京飞东京" data-index="{{index}}" data-field="title" bindinput="handleTicketInput" />
+        <view class="ticket-grid">
+          <input value="{{item.departure}}" placeholder="出发地" data-index="{{index}}" data-field="departure" bindinput="handleTicketInput" />
+          <input value="{{item.arrival}}" placeholder="到达地" data-index="{{index}}" data-field="arrival" bindinput="handleTicketInput" />
+        </view>
+        <view class="ticket-grid">
+          <input value="{{item.ticketNo}}" placeholder="航班/车次" data-index="{{index}}" data-field="ticketNo" bindinput="handleTicketInput" />
+          <input value="{{item.seat}}" placeholder="座位" data-index="{{index}}" data-field="seat" bindinput="handleTicketInput" />
+        </view>
+        <input value="{{item.note}}" placeholder="备注，例如 值机口、车厢、订单号" data-index="{{index}}" data-field="note" bindinput="handleTicketInput" />
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="secondary-button" disabled="{{saving || deleting}}" bindtap="chooseImages">继续添加照片</button>
+    <button class="primary-button" loading="{{saving}}" disabled="{{saving || deleting}}" bindtap="saveRecord">完成记录</button>
+    <button wx:if="{{recordId}}" class="danger-button" loading="{{deleting}}" disabled="{{saving || deleting}}" bindtap="deleteRecord">删除日志</button>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class="map-board">
+  <view class="map-head">
+    <text class="map-title">{{title}}</text>
+    <text class="map-subtitle">{{subtitle}}</text>
+  </view>
+
+  <view class="map-canvas">
+    <view
+      wx:for="{{regions}}"
+      wx:key="regionCode"
+      class="region {{item.lit ? 'region-lit' : ''}}"
+      style="{{item.style}}"
+      data-index="{{index}}"
+      bindtap="handleRegionTap"
+    ></view>
+
+    <text
+      wx:for="{{regions}}"
+      wx:key="regionCode"
+      class="region-label {{item.lit ? 'region-label-lit' : ''}}"
+      style="{{item.labelStyle}}"
+      data-index="{{index}}"
+      bindtap="handleRegionTap"
+    >{{item.name}}</text>
+  </view>
+
+  <view class="region-list">
+    <button
+      wx:for="{{regions}}"
+      wx:key="regionCode"
+      class="region-chip {{item.lit ? 'region-chip-lit' : ''}}"
+      data-index="{{index}}"
+      bindtap="handleRegionTap"
+    >{{item.name}}</button>
+  </view>
+</view>

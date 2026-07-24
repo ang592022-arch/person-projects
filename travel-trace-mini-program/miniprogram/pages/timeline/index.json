@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "旅行时光",
+  "usingComponents": {
+    "page-title": "/components/page-title/index",
+    "empty-state": "/components/empty-state/index",
+    "bottom-navigation": "/components/bottom-navigation/index"
+  }
+}

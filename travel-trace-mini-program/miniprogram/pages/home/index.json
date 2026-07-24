@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "漫迹",
+  "usingComponents": {
+    "boundary-map-board": "/components/boundary-map-board/index",
+    "bottom-navigation": "/components/bottom-navigation/index"
+  }
+}

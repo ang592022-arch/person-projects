@@ -1,0 +1,23 @@
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84rpx;
+  padding: 0 30rpx;
+  color: var(--button-text, #FFFCF7);
+  font-size: 28rpx;
+  font-weight: 500;
+  background: var(--color-primary, #496B5C);
+  border-radius: var(--radius-button, 18rpx);
+  box-shadow: 0 10rpx 28rpx rgba(49, 76, 64, 0.12);
+  transition: transform var(--duration-fast, 120ms), opacity var(--duration-fast, 120ms);
+}
+
+.primary:active {
+  opacity: 0.9;
+  transform: scale(0.985);
+}
+
+.disabled {
+  opacity: 0.48;
+}

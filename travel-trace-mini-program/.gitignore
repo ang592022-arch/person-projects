@@ -1,0 +1,20 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+
+# Local WeChat Developer Tools and account configuration
+project.private.config.json
+miniprogram/config/env.ts
+miniprogram/miniprogram_npm/
+
+# Do not commit locally supplied China boundary datasets
+scripts/map-sources/china-*
+docs/geojson-archive/
+miniprogram/packages/map/data/geojson/province-cities/
+
+# Editor and local automation files
+.vscode/
+.idea/
+.codex-tools/

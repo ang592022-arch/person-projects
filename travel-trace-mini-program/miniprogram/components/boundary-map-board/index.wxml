@@ -1,0 +1,45 @@
+<view class="map-board {{compact ? 'compact' : ''}}">
+  <view wx:if="{{!compact}}" class="map-head">
+    <text class="map-title">{{title}}</text>
+    <text class="map-subtitle">{{subtitle}}</text>
+  </view>
+
+  <view wx:if="{{hasBoundaryData}}" class="map-canvas">
+    <canvas wx:if="{{hasBoundaryData}}" id="boundaryCanvas" type="2d" class="boundary-canvas" bindtap="handleCanvasTap"></canvas>
+    <block wx:for="{{regions}}" wx:key="regionCode">
+      <text
+        wx:if="{{showLabels && item.polygons.length}}"
+        class="region-label {{item.lit ? 'region-label-lit' : ''}}"
+        style="{{item.labelStyle}}"
+        data-index="{{index}}"
+        bindtap="handleRegionTap"
+      >{{item.name}}</text>
+    </block>
+    <block wx:for="{{markers}}" wx:key="id">
+      <view
+        class="map-marker {{item.lit ? 'map-marker-lit' : ''}}"
+        style="{{item.style}}"
+        data-index="{{index}}"
+        bindtap="handleMarkerTap"
+      >
+        <view class="map-marker-core"></view>
+        <text wx:if="{{item.visitCount > 1}}" class="map-marker-count">{{item.visitCount}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view wx:else class="missing-boundary">
+    <text class="missing-title">标准边界数据未导入</text>
+    <text class="missing-copy">{{missingText}}</text>
+  </view>
+
+  <view wx:if="{{showRegionList}}" class="region-list">
+    <button
+      wx:for="{{regions}}"
+      wx:key="regionCode"
+      class="region-chip {{item.lit ? 'region-chip-lit' : ''}}"
+      data-index="{{index}}"
+      bindtap="handleRegionTap"
+    >{{item.name}}</button>
+  </view>
+</view>

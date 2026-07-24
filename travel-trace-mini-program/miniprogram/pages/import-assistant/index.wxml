@@ -1,0 +1,116 @@
+<view class="page import-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="hero theme-card {{shadowClass}}">
+    <text class="hero-kicker">Import Assistant</text>
+    <text class="section-title">截图智能导入</text>
+    <text class="section-subtitle">识别携程、高德、机票、火车票和高铁票截图，先列出候选足迹，确认后再点亮地图。</text>
+    <view class="step-row">
+      <view class="step active"><text>1</text><text>上传/粘贴</text></view>
+      <view class="step {{detectedPlaces.length > 0 ? 'active' : ''}}"><text>2</text><text>确认地点</text></view>
+      <view class="step {{imported ? 'active' : ''}}"><text>3</text><text>生成记录</text></view>
+    </view>
+  </view>
+
+  <view class="section upload-card theme-card {{shadowClass}}">
+    <view class="section-head">
+      <view>
+        <text class="label compact-label">截图来源</text>
+        <text class="hint no-margin">支持相册、相机截图；未配置 OCR 时可以直接粘贴文字。</text>
+      </view>
+    </view>
+
+    <view class="action-row">
+      <button class="secondary-button" disabled="{{recognizing || saving}}" bindtap="chooseScreenshot">选择截图</button>
+      <button class="primary-button" loading="{{recognizing}}" disabled="{{recognizing || saving}}" bindtap="recognizeScreenshot">识别文字</button>
+    </view>
+
+    <view wx:if="{{ocrError}}" class="ocr-error">
+      <text>{{ocrError}}</text>
+    </view>
+
+    <view wx:if="{{screenshotUrl}}" class="screenshot-wrap">
+      <image class="screenshot" src="{{screenshotUrl}}" mode="aspectFill" />
+      <text class="screenshot-label">已选择截图</text>
+    </view>
+
+    <view wx:else class="upload-empty">
+      <text class="upload-plus">+</text>
+      <text>添加携程、高德、票据或景点截图</text>
+    </view>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <view class="section-head">
+      <view>
+        <text class="label compact-label">识别文字</text>
+        <text class="hint no-margin">粘贴行程文字后点击解析，系统会提取城市、日期、票据和标签。</text>
+      </view>
+      <button class="secondary-button mini-button" loading="{{parsing}}" disabled="{{parsing || saving}}" bindtap="parseText">解析</button>
+    </view>
+    <textarea value="{{ocrText}}" maxlength="8000" placeholder="粘贴携程旅行足迹、机票、车票、景点订单或行程文字" bindinput="handleTextInput" />
+  </view>
+
+  <view wx:if="{{detectedPlaces.length > 0}}" class="section theme-card {{shadowClass}}">
+    <view class="section-head">
+      <view>
+        <text class="label compact-label">识别到的足迹</text>
+        <text class="hint no-margin">已识别 {{detectedPlaces.length}} 个地点，当前选择 {{selectedPlaceCount}} 个。</text>
+      </view>
+      <button class="primary-button mini-button" loading="{{saving}}" disabled="{{saving || selectedPlaceCount == 0}}" bindtap="saveSelectedPlaces">导入已选</button>
+    </view>
+
+    <view class="place-list">
+      <view
+        wx:for="{{detectedPlaces}}"
+        wx:key="id"
+        class="place-item {{item.selected ? 'selected' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="togglePlaceSelection"
+      >
+        <view class="place-check">{{item.selected ? '✓' : ''}}</view>
+        <view class="place-main">
+          <text class="place-name">{{item.cityName}}</text>
+          <text class="place-meta">{{item.countryName || '待确认国家'}} · 置信度{{item.confidenceText}}</text>
+          <text class="place-status">{{item.statusText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{ocrText && detectedPlaces.length == 0 && !parsing}}" class="section review-card theme-card {{shadowClass}}">
+    <text class="label compact-label">还没识别到可定位城市</text>
+    <text class="hint no-margin">如果截图里有陌生国外城市，请在下方填写城市并选择国家；保存后会自动添加到国外城市库并点亮对应国家。</text>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="label">导入预览</text>
+    <picker mode="date" value="{{parsed.visitDate}}" bindchange="handleDateChange">
+      <view class="picker-value">{{parsed.visitDate}}</view>
+    </picker>
+    <input value="{{parsed.title}}" placeholder="标题" bindinput="handleTitleInput" />
+    <textarea value="{{parsed.content}}" maxlength="3000" placeholder="日志内容" bindinput="handleContentInput" />
+    <input value="{{parsedTagsText}}" placeholder="标签，例如 携程足迹 机票 景点" bindinput="handleTagsInput" />
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="label">手动校正城市</text>
+    <input value="{{manualCityName}}" placeholder="城市名，例如 赫尔辛基 / Tokyo / 成都" bindinput="handleCityInput" />
+    <picker range="{{countries}}" range-key="name" value="{{countryIndex}}" bindchange="handleCountryChange">
+      <view class="picker-value">国家/地区：{{countries[countryIndex].name}}</view>
+    </picker>
+    <text class="hint">当前没有收录的国外城市会加入自定义城市点位，并点亮对应国家。</text>
+  </view>
+
+  <view wx:if="{{parsed.tickets.length > 0}}" class="section theme-card {{shadowClass}}">
+    <text class="label">识别到的票据</text>
+    <view wx:for="{{parsed.tickets}}" wx:key="id" class="ticket-line">
+      <text class="ticket-type">{{item.type === 'flight' ? '机票' : item.type === 'train' ? '火车票' : '高铁票'}}</text>
+      <text>{{item.departure || '?'}} → {{item.arrival || '?'}}</text>
+      <text>{{item.ticketNo || ''}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="secondary-button" loading="{{saving}}" disabled="{{saving || selectedPlaceCount == 0}}" bindtap="saveSelectedPlaces">批量导入</button>
+    <button class="primary-button" loading="{{saving}}" disabled="{{saving}}" bindtap="saveImport">导入为单条记录</button>
+  </view>
+</view>

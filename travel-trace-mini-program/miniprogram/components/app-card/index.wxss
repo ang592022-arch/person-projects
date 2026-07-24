@@ -1,0 +1,31 @@
+.card {
+  padding: var(--space-card, 28rpx);
+  color: var(--color-text, #27312D);
+  background: var(--color-card, #FFFCF7);
+  border: 1rpx solid var(--color-border, #E7E1D7);
+  border-radius: var(--radius-card, 20rpx);
+}
+
+.elevated {
+  background: var(--color-elevated, #FFFFFF);
+  box-shadow: var(--shadow-soft, 0 10rpx 32rpx rgba(49, 76, 64, 0.08));
+}
+
+.head {
+  display: grid;
+  gap: 6rpx;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  color: var(--color-text, #27312D);
+  font-size: 32rpx;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.subtitle {
+  color: var(--color-text-secondary, #777D78);
+  font-size: 24rpx;
+  line-height: 1.5;
+}

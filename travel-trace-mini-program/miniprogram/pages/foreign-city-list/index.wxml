@@ -1,0 +1,34 @@
+<view class="page foreign-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="head theme-card {{shadowClass}}">
+    <text class="section-title">{{countryName}}</text>
+    <text class="section-subtitle">选择城市进入旅行空间。没有内置的城市也可以直接添加，国外第一版使用城市点位，不加载城市边界。</text>
+  </view>
+
+  <view class="add-city theme-card {{shadowClass}}">
+    <text class="add-title">添加这个国家的城市</text>
+    <view class="add-row">
+      <input value="{{newCityName}}" placeholder="例如：Helsinki / 赫尔辛基" bindinput="handleCityNameInput" />
+      <button loading="{{addingCity}}" disabled="{{addingCity}}" bindtap="addCustomCity">添加</button>
+    </view>
+  </view>
+
+  <view wx:if="{{cities.length === 0}}" class="empty theme-card {{shadowClass}}">
+    <text>这个国家暂时还没有内置城市点位。你可以在上方手动添加城市。</text>
+  </view>
+
+  <view class="city-list">
+    <view
+      wx:for="{{cities}}"
+      wx:key="regionCode"
+      class="city-item theme-card {{shadowClass}} {{item.lit ? 'lit' : ''}}"
+      aria-role="button"
+      aria-label="打开 {{item.name}} 旅行空间"
+      hover-class="city-item-pressed"
+      data-code="{{item.regionCode}}"
+      bindtap="handleCityTap"
+    >
+      <text class="city-name">{{item.name}}</text>
+      <text class="city-meta">{{item.lit ? '已点亮 · ' + item.visitCount + ' 次' : '未点亮'}}</text>
+    </view>
+  </view>
+</view>

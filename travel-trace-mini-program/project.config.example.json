@@ -1,0 +1,24 @@
+{
+  "description": "Example WeChat Mini Program config. Copy to project.config.json and fill your own appid if needed.",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "useCompilerPlugins": [
+      "typescript"
+    ],
+    "coverView": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "enhance": true,
+    "showShadowRootInWxmlPanel": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.7.12",
+  "appid": "touristappid",
+  "projectname": "travel-map-diary",
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "condition": {}
+}

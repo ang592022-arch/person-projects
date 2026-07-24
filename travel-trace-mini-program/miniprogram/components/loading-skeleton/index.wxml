@@ -1,0 +1,6 @@
+<view class="skeleton-card">
+  <view class="cover skeleton-shimmer"></view>
+  <view class="lines">
+    <view wx:for="{{rows}}" wx:key="*this" class="line skeleton-shimmer width-{{index}}"></view>
+  </view>
+</view>

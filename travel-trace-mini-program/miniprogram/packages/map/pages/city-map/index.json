@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "boundary-map-board": "/components/boundary-map-board/index",
+    "loading-skeleton": "/components/loading-skeleton/index"
+  },
+  "navigationBarTitleText": "城市地图"
+}

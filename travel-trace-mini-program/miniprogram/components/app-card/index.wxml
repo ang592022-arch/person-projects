@@ -1,0 +1,7 @@
+<view class="card {{elevated ? 'elevated' : ''}}">
+  <view wx:if="{{title || subtitle}}" class="head">
+    <text wx:if="{{title}}" class="title">{{title}}</text>
+    <text wx:if="{{subtitle}}" class="subtitle">{{subtitle}}</text>
+  </view>
+  <slot />
+</view>

@@ -1,0 +1,75 @@
+<view class="page mine-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="profile-card theme-card {{shadowClass}}">
+    <view class="profile-head">
+      <view class="avatar-mark">漫</view>
+      <view class="profile-copy">
+        <text class="nickname">旅行者</text>
+        <text class="signature">把走过的地方，慢慢写成自己的地图。</text>
+        <text class="personal-badge">个人学习作品 · 非公开体验</text>
+      </view>
+    </view>
+    <view class="joined">
+      <text class="joined-number">{{joinedDays}}</text>
+      <text class="joined-label">天旅行手账</text>
+    </view>
+  </view>
+
+  <view class="metric-card theme-card {{shadowClass}}">
+    <view class="metric">
+      <text class="metric-value">{{litCount}}</text>
+      <text class="metric-label">点亮地区</text>
+    </view>
+    <view class="metric">
+      <text class="metric-value">{{recordCount}}</text>
+      <text class="metric-label">旅行次数</text>
+    </view>
+    <view class="metric">
+      <text class="metric-value">{{journalCount}}</text>
+      <text class="metric-label">日志</text>
+    </view>
+    <view class="metric">
+      <text class="metric-value">{{mediaCount}}</text>
+      <text class="metric-label">影像</text>
+    </view>
+  </view>
+
+  <view class="overview-row">
+    <view class="overview theme-card">
+      <text class="overview-value">{{cityCount}}</text>
+      <text class="overview-label">记录城市</text>
+    </view>
+    <view class="overview theme-card">
+      <text class="overview-value">{{countryCount}}</text>
+      <text class="overview-label">关联国家/地区</text>
+    </view>
+  </view>
+
+  <page-title
+    eyebrow="Settings"
+    title="我的漫迹"
+    subtitle="主题、数据和旅行工具都放在这里。"
+  />
+
+  <view class="entry-list theme-card {{shadowClass}}">
+    <button
+      wx:for="{{entries}}"
+      wx:key="action"
+      class="entry"
+      data-action="{{item.action}}"
+      bindtap="handleEntryTap"
+    >
+      <view class="entry-icon"></view>
+      <view class="entry-copy">
+        <text class="entry-title">{{item.title}}</text>
+        <text class="entry-subtitle">{{item.subtitle}}</text>
+      </view>
+      <text class="entry-arrow">›</text>
+    </button>
+  </view>
+
+  <view class="data-attribution">
+    <text>地图数据：Natural Earth、geoBoundaries、© OpenStreetMap contributors (ODbL 1.0)</text>
+  </view>
+
+  <bottom-navigation active="mine" />
+</view>

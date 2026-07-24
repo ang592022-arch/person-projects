@@ -1,0 +1,52 @@
+<view class="page report-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="report-cover {{shadowClass}}">
+    <text class="report-kicker">ANNUAL TRAVEL REPORT</text>
+    <text class="report-year">{{selectedYear}}</text>
+    <text class="report-title">这一年，远方成为了故事</text>
+    <picker range="{{years}}" value="{{yearIndex}}" bindchange="handleYearChange">
+      <view class="year-picker">切换年份　›</view>
+    </picker>
+  </view>
+
+  <view wx:if="{{hasRecords}}">
+    <view class="summary-card theme-card {{shadowClass}}">
+      <view class="summary-main">
+        <text class="summary-number">{{tripCount}}</text>
+        <text class="summary-label">段旅行</text>
+      </view>
+      <view class="summary-copy">
+        <text>跨越 {{activeMonthCount}} 个月份</text>
+        <text>留下 {{mediaCount}} 张照片和视频</text>
+      </view>
+    </view>
+
+    <view class="region-grid">
+      <view class="region-stat theme-card"><text>{{countryCount}}</text><text>国家/地区</text></view>
+      <view class="region-stat theme-card"><text>{{provinceCount}}</text><text>省份</text></view>
+      <view class="region-stat theme-card"><text>{{cityCount}}</text><text>城市</text></view>
+      <view class="region-stat theme-card"><text>{{countyCount}}</text><text>县级地区</text></view>
+    </view>
+
+    <view class="highlight-card theme-card {{shadowClass}}">
+      <text class="block-kicker">MOST VISITED</text>
+      <text class="highlight-name">{{topRegionName}}</text>
+      <text class="highlight-copy">这是你在 {{selectedYear}} 年记录次数最多的地方。</text>
+    </view>
+
+    <view class="journey-list theme-card {{shadowClass}}">
+      <text class="block-title">年度旅程</text>
+      <view wx:for="{{records}}" wx:key="id" class="journey-item">
+        <text class="journey-date">{{item.date}}</text>
+        <view><text class="journey-place">{{item.regionName}}</text><text class="journey-title">{{item.title}}</text></view>
+      </view>
+    </view>
+  </view>
+
+  <empty-state
+    wx:else
+    title="这一年还没有旅行记录"
+    description="选择其他年份，或者记录一次新的旅行。"
+    action-text="去添加足迹"
+    bindaction="goAddFootprint"
+  />
+</view>

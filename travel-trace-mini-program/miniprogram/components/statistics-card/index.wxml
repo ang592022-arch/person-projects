@@ -1,0 +1,7 @@
+<view class="stats-card">
+  <view wx:for="{{items}}" wx:key="label" class="stat-item">
+    <text class="value">{{item.value}}</text>
+    <text class="label">{{item.label}}</text>
+    <text wx:if="{{item.helper}}" class="helper">{{item.helper}}</text>
+  </view>
+</view>

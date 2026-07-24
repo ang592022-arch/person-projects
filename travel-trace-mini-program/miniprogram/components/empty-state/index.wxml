@@ -1,0 +1,10 @@
+<view class="empty-state">
+  <view class="illustration">
+    <view class="map-line one"></view>
+    <view class="map-line two"></view>
+    <view class="pin"></view>
+  </view>
+  <text class="title">{{title}}</text>
+  <text wx:if="{{description}}" class="description">{{description}}</text>
+  <button wx:if="{{actionText}}" class="action" bindtap="handleAction">{{actionText}}</button>
+</view>

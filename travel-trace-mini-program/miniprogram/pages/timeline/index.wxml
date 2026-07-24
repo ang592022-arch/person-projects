@@ -1,0 +1,78 @@
+<view class="page timeline-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <page-title
+    eyebrow="Travel Timeline"
+    title="旅行时光"
+    subtitle="所有远方，最后都成为故事。"
+  />
+
+  <view class="summary-card theme-card {{shadowClass}}">
+    <view>
+      <text class="summary-value">{{totalRecords}}</text>
+      <text class="summary-label">段旅行记录</text>
+    </view>
+    <view class="summary-divider"></view>
+    <view>
+      <text class="summary-value">{{totalCities}}</text>
+      <text class="summary-label">个故事地点</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-card theme-card {{shadowClass}}">
+    <view class="loading-line wide"></view>
+    <view class="loading-line"></view>
+    <view class="loading-line short"></view>
+  </view>
+
+  <empty-state
+    wx:elif="{{yearGroups.length == 0}}"
+    title="这里还没有留下故事"
+    description="下一次出发后，记得回来记录旅程。"
+    action-text="添加第一座城市"
+    bindaction="goAddCity"
+  />
+
+  <view wx:else class="year-list">
+    <view wx:for="{{yearGroups}}" wx:key="year" class="year-group">
+      <view class="year-head">
+        <text class="year">{{item.year}}</text>
+        <text class="year-summary">{{item.summary}}</text>
+      </view>
+
+      <view class="record-list">
+        <button
+          wx:for="{{item.records}}"
+          wx:for-item="record"
+          wx:key="id"
+          class="record-card theme-card {{shadowClass}}"
+          data-region-code="{{record.regionCode}}"
+          bindtap="openRecord"
+        >
+          <view class="record-dot"></view>
+          <image
+            wx:if="{{record.coverUrl}}"
+            class="record-cover"
+            mode="aspectFill"
+            src="{{record.coverUrl}}"
+          />
+          <view wx:else class="record-cover placeholder">
+            <text>{{record.initial}}</text>
+          </view>
+          <view class="record-body">
+            <view class="record-meta">
+              <text>{{record.visitDate}}</text>
+              <text wx:if="{{record.mediaCount}}">{{record.mediaCount}} 张影像</text>
+            </view>
+            <text class="record-title">{{record.title}}</text>
+            <text class="record-place">{{record.regionName}}{{record.parentName ? ' · ' + record.parentName : ''}}</text>
+            <text class="record-content">{{record.content}}</text>
+            <view wx:if="{{record.tags.length}}" class="tag-row">
+              <text wx:for="{{record.tags}}" wx:key="*this" class="tag">{{item}}</text>
+            </view>
+          </view>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <bottom-navigation active="time" />
+</view>

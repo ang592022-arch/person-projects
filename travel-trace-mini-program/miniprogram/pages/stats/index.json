@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "旅行统计",
+  "usingComponents": {
+    "bottom-navigation": "/components/bottom-navigation/index"
+  }
+}

@@ -1,0 +1,23 @@
+.secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80rpx;
+  padding: 0 28rpx;
+  color: var(--color-primary, #496B5C);
+  font-size: 28rpx;
+  font-weight: 500;
+  background: var(--color-primary-light, #E4ECE7);
+  border: 1rpx solid rgba(73, 107, 92, 0.14);
+  border-radius: var(--radius-button, 18rpx);
+  transition: transform var(--duration-fast, 120ms), opacity var(--duration-fast, 120ms);
+}
+
+.secondary:active {
+  opacity: 0.9;
+  transform: scale(0.985);
+}
+
+.disabled {
+  opacity: 0.48;
+}

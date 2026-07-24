@@ -1,0 +1,100 @@
+<view class="settings-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="preview theme-card {{shadowClass}}">
+    <view class="preview-cover" style="{{homeCoverStyle}}"></view>
+    <view class="preview-content">
+      <text class="preview-title">旅行地图预览</text>
+      <text class="preview-subtitle">主题会影响首页、地图颜色和日志展示方式。</text>
+      <view class="preview-map">
+        <view class="mock-region unvisited"></view>
+        <view class="mock-region visited"></view>
+        <view class="mock-region multi"></view>
+      </view>
+    </view>
+  </view>
+
+  <text wx:if="{{warning}}" class="warning">{{warning}}</text>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="section-name">主题预设</text>
+    <view class="preset-grid">
+      <button
+        wx:for="{{presets}}"
+        wx:key="id"
+        class="preset {{theme.id === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="handlePresetTap"
+      >
+        {{item.name}}
+      </button>
+    </view>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <view class="row">
+      <text class="section-name">暗色模式</text>
+      <switch checked="{{darkMode}}" color="{{theme.colors.primary}}" bindchange="handleDarkModeChange" />
+    </view>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="section-name">颜色</text>
+    <view class="color-group">
+      <text class="label">主色</text>
+      <view class="swatches">
+        <button wx:for="{{colorOptions}}" wx:key="*this" class="swatch" style="background:{{item}}" data-field="primary" data-value="{{item}}" bindtap="handleColorTap"></button>
+      </view>
+    </view>
+    <view class="color-group">
+      <text class="label">已点亮地区</text>
+      <view class="swatches">
+        <button wx:for="{{colorOptions}}" wx:key="*this" class="swatch" style="background:{{item}}" data-field="visitedRegion" data-value="{{item}}" bindtap="handleColorTap"></button>
+      </view>
+    </view>
+    <view class="color-group">
+      <text class="label">未访问地区</text>
+      <view class="swatches">
+        <button wx:for="{{colorOptions}}" wx:key="*this" class="swatch" style="background:{{item}}" data-field="unvisitedRegion" data-value="{{item}}" bindtap="handleColorTap"></button>
+      </view>
+    </view>
+    <view class="color-group">
+      <text class="label">页面背景</text>
+      <view class="swatches">
+        <button wx:for="{{colorOptions}}" wx:key="*this" class="swatch" style="background:{{item}}" data-field="background" data-value="{{item}}" bindtap="handleColorTap"></button>
+      </view>
+    </view>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="section-name">卡片圆角：{{theme.card.borderRadius}}rpx</text>
+    <slider min="0" max="28" step="2" value="{{theme.card.borderRadius}}" activeColor="{{theme.colors.primary}}" bindchange="handleRadiusChange" />
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="section-name">首页背景图</text>
+    <view class="cover-actions">
+      <button class="secondary-button" bindtap="chooseHomeCover">选择图片</button>
+      <button class="secondary-button" bindtap="removeHomeCover">移除图片</button>
+    </view>
+    <text class="hint">图片需小于 2MB；应用主题后会同步到云端，换设备仍可恢复。</text>
+  </view>
+
+  <view class="section theme-card {{shadowClass}}">
+    <text class="section-name">日志展示方式</text>
+    <view class="layout-tabs">
+      <button
+        wx:for="{{journalLayouts}}"
+        wx:key="value"
+        class="layout-tab {{selectedLayout === item.value ? 'active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="handleLayoutTap"
+      >
+        {{item.label}}
+      </button>
+    </view>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="secondary-button" bindtap="resetTheme">恢复默认</button>
+    <button class="primary-button" loading="{{saving}}" disabled="{{saving}}" bindtap="saveTheme">{{dirty ? '保存设置' : '已保存'}}</button>
+  </view>
+</view>

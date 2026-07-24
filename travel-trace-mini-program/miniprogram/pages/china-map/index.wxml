@@ -1,0 +1,44 @@
+<view class="page map-page china-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="map-hero theme-card {{loading ? '' : 'theme-shadow-light'}}">
+    <view>
+      <text class="map-kicker">China Trace</text>
+      <text class="map-heading">中国足迹</text>
+      <text class="map-copy">点亮你走过的每一座城。点击省份后进入城市地图，旅行记录以城市为最小单位保存。</text>
+    </view>
+    <view class="hero-stats">
+      <view>
+        <text class="hero-number">{{litCityCount}}</text>
+        <text class="hero-label">城市</text>
+      </view>
+      <view>
+        <text class="hero-number">{{litProvinceCount}}</text>
+        <text class="hero-label">省级地区</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="legend-card theme-card">
+    <view class="legend-item"><view class="legend-dot visited"></view><text>已去过</text></view>
+    <view class="legend-item"><view class="legend-dot wishlist"></view><text>想去</text></view>
+    <view class="legend-item"><view class="legend-dot unvisited"></view><text>未到访</text></view>
+    <view class="legend-item"><view class="legend-line"></view><text>点击省份下钻</text></view>
+  </view>
+
+  <loading-skeleton wx:if="{{loading}}" rows="{{3}}" />
+
+  <boundary-map-board
+    wx:else
+    title="省级行政区"
+    subtitle="真实省级边界。绿色代表这个省下面至少有一个城市已经点亮。"
+    missing-text="省级边界暂时无法加载，请返回后重试。"
+    show-labels="{{false}}"
+    show-region-list="{{false}}"
+    regions="{{regions}}"
+    theme="{{theme}}"
+    bindregiontap="handleRegionTap"
+  />
+
+  <text class="map-compliance-note">{{mapComplianceNote}}</text>
+
+  <bottom-navigation active="map" />
+</view>

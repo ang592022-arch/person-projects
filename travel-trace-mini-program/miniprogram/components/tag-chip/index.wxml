@@ -1,0 +1,3 @@
+<view class="chip tone-{{tone}}">
+  <text>{{text}}</text>
+</view>

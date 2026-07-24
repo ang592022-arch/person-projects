@@ -1,0 +1,125 @@
+<view class="picker-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="picker-header">
+    <text class="picker-eyebrow">QUICK ADD</text>
+    <text class="picker-title">添加去过的城市</text>
+    <text class="picker-subtitle">先选择省份，再点击城市即可点亮。旅行日志可以稍后在地区详情中补充。</text>
+
+    <view class="search-box">
+      <input
+        class="search-input"
+        value="{{query}}"
+        placeholder="搜索省份或城市"
+        placeholder-class="search-placeholder"
+        confirm-type="search"
+        bindinput="handleSearchInput"
+      />
+      <button wx:if="{{query}}" class="clear-button" aria-label="清空搜索" bindtap="clearSearch">×</button>
+    </view>
+  </view>
+
+  <view wx:if="{{query}}" class="content-section">
+    <view class="section-summary">
+      <text class="section-title">搜索结果</text>
+      <text class="section-meta">{{searchResults.length}} 个城市</text>
+    </view>
+    <scroll-view wx:if="{{searchResults.length}}" scroll-y class="city-scroll">
+      <button
+        wx:for="{{searchResults}}"
+        wx:key="regionCode"
+        class="city-row {{item.visited ? 'visited' : ''}}"
+        data-region-code="{{item.regionCode}}"
+        data-name="{{item.name}}"
+        bindtap="addCity"
+      >
+        <view class="city-copy">
+          <text class="city-name">{{item.name}}</text>
+          <text class="city-parent">{{item.provinceName}}</text>
+        </view>
+        <text class="city-status">{{item.visited ? '已点亮' : (savingRegionCode === item.regionCode ? '添加中' : '点亮')}}</text>
+      </button>
+    </scroll-view>
+    <view wx:else class="search-empty">
+      <text class="empty-title">没有找到这个城市</text>
+      <text class="empty-copy">可以换一个城市名或省份名再试试。</text>
+    </view>
+  </view>
+
+  <view wx:elif="{{activeProvinceCode}}" class="content-section">
+    <view class="province-summary">
+      <button class="back-button" aria-label="重新选择省份" bindtap="chooseAnotherProvince">‹</button>
+      <view>
+        <text class="section-title">{{activeProvinceName}}</text>
+        <text class="section-meta">选择去过的城市，可连续添加</text>
+      </view>
+    </view>
+    <scroll-view scroll-y class="city-scroll">
+      <button
+        wx:for="{{cities}}"
+        wx:key="regionCode"
+        class="city-row {{item.visited ? 'visited' : ''}}"
+        data-region-code="{{item.regionCode}}"
+        data-name="{{item.name}}"
+        bindtap="addCity"
+      >
+        <view class="city-copy">
+          <text class="city-name">{{item.name}}</text>
+          <text class="city-parent">{{item.visited ? '已经加入旅行地图' : '点击后立即点亮'}}</text>
+        </view>
+        <text class="city-status">{{item.visited ? '已点亮' : (savingRegionCode === item.regionCode ? '添加中' : '点亮')}}</text>
+      </button>
+    </scroll-view>
+  </view>
+
+  <view wx:else class="content-section province-section">
+    <view class="section-summary">
+      <text class="section-title">选择省份</text>
+      <text class="section-meta">按右侧字母快速定位</text>
+    </view>
+    <scroll-view scroll-y scroll-into-view="{{scrollTarget}}" scroll-with-animation class="province-scroll">
+      <view
+        wx:for="{{provinceGroups}}"
+        wx:key="initial"
+        wx:for-item="group"
+        id="province-{{group.initial}}"
+        class="province-group"
+      >
+        <text class="group-letter">{{group.initial}}</text>
+        <button
+          wx:for="{{group.items}}"
+          wx:key="regionCode"
+          wx:for-item="province"
+          class="province-row"
+          data-region-code="{{province.regionCode}}"
+          data-name="{{province.name}}"
+          bindtap="selectProvince"
+        >
+          <text class="province-name">{{province.name}}</text>
+          <view class="province-trailing">
+            <text>{{province.cityCount}} 个城市</text>
+            <text class="row-arrow">›</text>
+          </view>
+        </button>
+      </view>
+    </scroll-view>
+
+    <view class="alphabet-index">
+      <text
+        wx:for="{{alphabet}}"
+        wx:key="letter"
+        class="alphabet-letter {{item.enabled ? '' : 'disabled'}}"
+        aria-role="button"
+        data-letter="{{item.letter}}"
+        data-enabled="{{item.enabled}}"
+        bindtap="jumpToInitial"
+      >{{item.letter}}</text>
+    </view>
+  </view>
+
+  <view class="picker-footer">
+    <view class="visited-total">
+      <text class="visited-number">{{visitedCount}}</text>
+      <text class="visited-label">座城市已点亮</text>
+    </view>
+    <button class="finish-button {{shadowClass}}" bindtap="finish">完成</button>
+  </view>
+</view>

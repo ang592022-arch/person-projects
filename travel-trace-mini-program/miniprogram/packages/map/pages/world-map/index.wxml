@@ -1,0 +1,45 @@
+<view class="page map-page world-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <view class="map-hero theme-card {{loading ? '' : 'theme-shadow-light'}}">
+    <view>
+      <text class="map-kicker">World Trace</text>
+      <text class="map-heading">世界地图</text>
+      <text class="map-copy">这里显示国家/地区边界和城市足迹点。中国地图中点亮的城市，会同步出现在世界地图上。</text>
+    </view>
+    <view class="hero-stats">
+      <view>
+        <text class="hero-number">{{litCountryCount}}</text>
+        <text class="hero-label">国家/地区</text>
+      </view>
+      <view>
+        <text class="hero-number">{{markerCount}}</text>
+        <text class="hero-label">城市点位</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="legend-card theme-card">
+    <view class="legend-item"><view class="legend-dot visited"></view><text>已点亮国家</text></view>
+    <view class="legend-item"><view class="legend-dot marker"></view><text>城市足迹</text></view>
+    <view class="legend-item"><view class="legend-dot unvisited"></view><text>未到访</text></view>
+  </view>
+
+  <loading-skeleton wx:if="{{loading}}" rows="{{3}}" />
+
+  <boundary-map-board
+    wx:else
+    title="世界边界"
+    subtitle="点击中国进入国内省市地图；点击其他国家可以维护国外城市足迹。"
+    missing-text="当前还没有导入世界边界文件。导入合规 GeoJSON 后这里会显示真实世界边界。"
+    show-labels="{{false}}"
+    show-region-list="{{false}}"
+    regions="{{regions}}"
+    markers="{{markers}}"
+    theme="{{theme}}"
+    bindregiontap="handleRegionTap"
+    bindmarkertap="handleMarkerTap"
+  />
+
+  <text class="map-compliance-note">{{mapComplianceNote}}</text>
+
+  <bottom-navigation active="map" />
+</view>

@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "设计系统",
+  "usingComponents": {
+    "page-title": "/components/page-title/index",
+    "primary-button": "/components/primary-button/index",
+    "secondary-button": "/components/secondary-button/index",
+    "app-card": "/components/app-card/index",
+    "tag-chip": "/components/tag-chip/index",
+    "statistics-card": "/components/statistics-card/index",
+    "empty-state": "/components/empty-state/index",
+    "loading-skeleton": "/components/loading-skeleton/index",
+    "bottom-navigation": "/components/bottom-navigation/index"
+  }
+}

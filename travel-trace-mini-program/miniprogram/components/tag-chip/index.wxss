@@ -1,0 +1,22 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44rpx;
+  padding: 0 18rpx;
+  color: var(--color-primary, #496B5C);
+  font-size: 22rpx;
+  font-weight: 500;
+  line-height: 44rpx;
+  background: var(--color-primary-light, #E4ECE7);
+  border-radius: var(--radius-pill, 999rpx);
+}
+
+.tone-accent {
+  color: var(--color-accent, #C28E5C);
+  background: var(--color-accent-light, #F2E7DA);
+}
+
+.tone-muted {
+  color: var(--color-text-secondary, #777D78);
+  background: rgba(119, 125, 120, 0.1);
+}

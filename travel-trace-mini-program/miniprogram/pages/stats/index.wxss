@@ -1,0 +1,131 @@
+.stats-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.annual-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 112rpx;
+  padding: 24rpx 28rpx;
+  text-align: left;
+}
+
+.annual-kicker,
+.annual-title {
+  display: block;
+}
+
+.annual-kicker {
+  color: var(--color-accent, #C28E5C);
+  font-size: 19rpx;
+  font-weight: 600;
+}
+
+.annual-title {
+  margin-top: 8rpx;
+  color: var(--text-primary, #27312D);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.annual-arrow {
+  color: var(--color-accent, #C28E5C);
+  font-size: 42rpx;
+  font-weight: 300;
+}
+
+.stat {
+  padding: 28rpx;
+}
+
+.num {
+  display: block;
+  color: var(--primary, #8fe0a2);
+  font-size: 52rpx;
+  font-weight: 800;
+}
+
+.distance-num {
+  font-size: 34rpx;
+  line-height: 1.25;
+}
+
+.label {
+  display: block;
+  margin-top: 8rpx;
+  color: var(--text-secondary, #aeb9ab);
+  font-size: 26rpx;
+}
+
+.recent,
+.migration {
+  display: grid;
+  gap: 16rpx;
+  padding: 28rpx;
+}
+
+.block-title {
+  color: var(--text-primary, #f4f1e7);
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.empty,
+.recent-item {
+  padding: 24rpx;
+  background: var(--card-background, rgba(255, 255, 255, 0.06));
+  border: 2rpx solid var(--map-border, rgba(218, 166, 88, 0.16));
+  border-radius: var(--card-radius, 10rpx);
+}
+
+.empty {
+  color: var(--text-secondary, #aeb9ab);
+  font-size: 26rpx;
+}
+
+.migration-copy,
+.migration-result {
+  display: block;
+  color: var(--text-secondary, #777D78);
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+
+.migrate-button {
+  margin-top: 4rpx;
+}
+
+.migration-result {
+  padding: 18rpx;
+  background: var(--color-primary-light, #E4ECE7);
+  border-radius: var(--radius-card, 20rpx);
+}
+
+.date,
+.title {
+  display: block;
+}
+
+.date {
+  color: var(--secondary, #f0bd64);
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.title {
+  margin-top: 8rpx;
+  color: var(--text-primary, #f4f1e7);
+  font-size: 28rpx;
+  font-weight: 800;
+}

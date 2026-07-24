@@ -1,0 +1,12 @@
+<view class="bottom-nav">
+  <button
+    wx:for="{{items}}"
+    wx:key="key"
+    class="nav-item {{active === item.key ? 'active' : ''}} {{item.featured ? 'featured' : ''}}"
+    data-index="{{index}}"
+    bindtap="handleTap"
+  >
+    <text class="icon">{{item.icon}}</text>
+    <text class="label">{{item.label}}</text>
+  </button>
+</view>

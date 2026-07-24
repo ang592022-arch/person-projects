@@ -1,0 +1,36 @@
+<view class="page preview-page themed-page {{themeClass}}" style="{{themeStyle}}">
+  <page-title
+    eyebrow="漫迹 · Travel Trace"
+    title="山川旅行手账"
+    subtitle="统一的颜色、文字、卡片、按钮和状态组件。"
+  />
+
+  <app-card title="按钮" subtitle="主按钮和次按钮都有轻微按压反馈。" elevated="{{true}}">
+    <view class="button-row">
+      <primary-button bindtap="showToast">记录新的旅行</primary-button>
+      <secondary-button bindtap="showToast">保存草稿</secondary-button>
+    </view>
+  </app-card>
+
+  <app-card title="标签和卡片" subtitle="用于旅行记录、票据、想去清单等轻量状态。">
+    <view class="chip-row">
+      <tag-chip text="自然风景" />
+      <tag-chip tone="accent" text="想去" />
+      <tag-chip tone="muted" text="胶片相册" />
+    </view>
+  </app-card>
+
+  <statistics-card items="{{stats}}" />
+
+  <empty-state
+    title="这里还没有留下故事"
+    description="下一次出发后，记得回来记录旅程。"
+    action-text="记录第一次旅行"
+    bindaction="showToast"
+  />
+
+  <loading-skeleton rows="{{3}}" />
+
+  <view class="bottom-space"></view>
+  <bottom-navigation active="map" />
+</view>
