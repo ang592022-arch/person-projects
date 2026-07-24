@@ -1,0 +1,35 @@
+name: Travel Trace checks
+
+on:
+  push:
+    paths:
+      - "travel-trace-mini-program/**"
+      - ".github/workflows/travel-trace-mini-program-check.yml"
+  pull_request:
+    paths:
+      - "travel-trace-mini-program/**"
+      - ".github/workflows/travel-trace-mini-program-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: travel-trace-mini-program
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: travel-trace-mini-program/pnpm-lock.yaml
+      - run: cp miniprogram/config/env.example.ts miniprogram/config/env.ts
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check
